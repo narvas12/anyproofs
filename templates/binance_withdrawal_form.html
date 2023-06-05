@@ -1,0 +1,63 @@
+{% extends 'base.html' %} 
+
+{% block style %}
+<style>
+  .form-container {
+    margin-top: 20px;
+  }
+  
+  .form-input {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  
+  .messages {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .messages li {
+    margin-bottom: 5px;
+  }
+  
+  .success {
+    color: green;
+  }
+  
+  .error {
+    color: red;
+  }
+
+  
+  
+</style>
+{% endblock style %}
+
+
+{% block blockchain_d %}
+  <center>
+    <div>
+      <a href="{% url 'profile' %}"><button>Email Comfirmation Services</button></a>
+    </div>
+    <h1>Input the reciever email and the Amount you want to send</h1>
+    {% if submitted %} Your deposit was successful {% else %}
+    <form action="" method="POST" class="form-container">
+      {% csrf_token %}
+      <input name="amount" placeholder="Amount" required class="form-input" />
+      <input name="currency" placeholder="BTC USDT ETH BNB USDC" required class="form-input" />
+      <input name="wallet" placeholder="Wallet" required class="form-input" />
+      <input name="receiver" placeholder="Receiver" required class="form-input" />
+      <input type="submit" value="Submit" />
+    </form>
+    {% endif %}
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </center>
+{% endblock blockchain_d %}
+
+
